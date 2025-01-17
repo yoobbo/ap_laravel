@@ -9,8 +9,8 @@
                 <h5 class="card-title">{{$posts->name}}</h5>
                 <p class="card-text">{{$posts->description}}</p>
                 <a href="/posts/{{$posts->id}}" class="btn btn-primary">view</a>
-                <a href="/posts/{{$posts->id}}/edit" class="btn btn-primary">Edit</a>
-                <form action="/posts/{{$posts->id}}" method="post" style="display: inline;">
+                <a href="/posts/{{$posts->id}}/edit" class="btn btn-success">Edit</a>
+                <form action="/posts/{{$posts->id}}" method="post" style="display: inline-block;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>

@@ -31,12 +31,17 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+        ]);
+
         $post = new Post();
         $post->name = $request->name;
         $post->description = $request->description;
 
         $post->save();
-        return redirect('/posts');
+        return redirect("/posts");
     }
 
     /**
@@ -45,7 +50,7 @@ class HomeController extends Controller
     public function show(string $id)
     {
         $data = Post::findOrFail($id);
-        return view("show",compact("data"));
+        return view('show', compact('data'));
     }
 
     /**
@@ -54,7 +59,7 @@ class HomeController extends Controller
     public function edit(string $id)
     {
         $data = Post::findOrFail($id);
-        return view("edit",compact("data"));
+        return view('edit', compact('data'));
     }
 
     /**
@@ -62,12 +67,12 @@ class HomeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::findOrFail($id);;
         $post->name = $request->name;
         $post->description = $request->description;
 
         $post->save();
-        return redirect('/posts');
+        return redirect("/posts");
     }
 
     /**
@@ -76,6 +81,6 @@ class HomeController extends Controller
     public function destroy(string $id)
     {
         Post::findOrFail($id)->delete();
-        return redirect('/posts');
+        return redirect("/posts");
     }
 }
