@@ -17,7 +17,7 @@ class PostSeeder extends Seeder
         DB::table('posts')->insert([
             'name' => Str::random(10),
             'description' => Str::random(255),
-            'created_at' => date("Y-m-d H:i:s"),
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
     }
 }

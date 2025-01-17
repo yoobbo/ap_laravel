@@ -1,18 +1,22 @@
-@extends("layout")
-@section("contact")
-    <h1 class="text-center">Home<h1>
+@extends('layout')
+@section('contact')
     <div class="container">
+    <a href="posts/create" class="btn btn-success">create</a><p></p>
         <div class="card">
-            <h5 class="card-header text-center">Featured</h5>
+            <h5 class="card-header">Featured</h5>
             <div class="card-body">
-                @foreach($data as $row)
-                <h5 class="card-title">{{$row->name}}</h5>
-                <p class="card-text">{{$row->description}}</p>
-                <a href="{{$row->id}}" class="btn btn-primary">View</a><p></p>
+                @foreach($data as $posts)
+                <h5 class="card-title">{{$posts->name}}</h5>
+                <p class="card-text">{{$posts->description}}</p>
+                <a href="/posts/{{$posts->id}}" class="btn btn-primary">view</a>
+                <a href="/posts/{{$posts->id}}/edit" class="btn btn-primary">Edit</a>
+                <form action="/posts/{{$posts->id}}" method="post" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form><p></p><hr>
                 @endforeach
-
             </div>
-            
         </div>
     </div>
-@endsection
+@endsection('contact')

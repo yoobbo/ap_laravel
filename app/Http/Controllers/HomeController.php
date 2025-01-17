@@ -4,12 +4,78 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 
 class HomeController extends Controller
 {
-    public function index(){
-        $data = Post::orderBy('id', 'desc')->get();
-        // dd() dump and die
-        return view("home",compact("data"));
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $data = Post::all();
+        return view("home", compact("data"));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $post = new Post();
+        $post->name = $request->name;
+        $post->description = $request->description;
+
+        $post->save();
+        return redirect('/posts');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $data = Post::findOrFail($id);
+        return view("show",compact("data"));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $data = Post::findOrFail($id);
+        return view("edit",compact("data"));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->name = $request->name;
+        $post->description = $request->description;
+
+        $post->save();
+        return redirect('/posts');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        Post::findOrFail($id)->delete();
+        return redirect('/posts');
     }
 }

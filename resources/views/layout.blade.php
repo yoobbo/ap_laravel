@@ -8,6 +8,7 @@
 
 </head>
 <body>
+    <h1 class="text-center">Blog</h1>
     @yield("contact")
 </body>
 </html>

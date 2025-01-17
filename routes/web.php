@@ -14,21 +14,16 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/',[HomeController::class, 'index']);
+// Route::get('posts',HomeController::class);
+Route::resource('posts',HomeController::class);
+// Route::get('posts/{id}', [HomeController::class, 'show']);
+// Route::get('posts/create', [HomeController::class, 'create']);
+// Route::get('/{id}', [HomeController::class, 'show']);
 
-// Route::get('contact', function () {
-//     $data=[
-//         'name' => "contact",
-//         'des' => "Pyae",
-//     ];
-//     return view("contact",compact("data"));
+
+
+// Route::get('posts/create', function () {
+//     echo "hehe";
 // });
 
-// Route::get('about', function () {
-//     $data=[
-//         'name' => "about",
-//         'des' => "Zon",
-//     ];
-//     return view("about",compact("data"));
-// });
 
