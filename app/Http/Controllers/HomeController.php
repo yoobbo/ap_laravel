@@ -50,6 +50,8 @@ class HomeController extends Controller
     public function show(Post $post)
     {
         // $data = Post::findOrFail($id);
+        // $post->categories;
+        dd($post->categories->name);
         return view('show', compact('post'));
     }
 
