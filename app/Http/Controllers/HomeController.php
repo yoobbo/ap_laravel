@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Post::all();
+        $data = Post::orderby("id", "desc")->get();
         return view("home", compact("data"));
     }
 
@@ -47,27 +47,31 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        $data = Post::findOrFail($id);
-        return view('show', compact('data'));
+        // $data = Post::findOrFail($id);
+        return view('show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        $data = Post::findOrFail($id);
-        return view('edit', compact('data'));
+        // $data = Post::findOrFail($id);
+        return view('edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,Post $post)
     {
-        $post = Post::findOrFail($id);;
+        // $post = Post::findOrFail($id);;
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+        ]);
         $post->name = $request->name;
         $post->description = $request->description;
 
@@ -78,9 +82,9 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        Post::findOrFail($id)->delete();
+        $post->delete();
         return redirect("/posts");
     }
 }
