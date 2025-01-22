@@ -1,7 +1,13 @@
 @extends('layout')
 @section('contact')
     <div class="container">
-    <a href="posts/create" class="btn btn-success">create</a><p></p>
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="posts/create" class="btn btn-success">Create</a>
+            <form action="logout" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-secondary">Logout</button>
+            </form>
+        </div><p></p>
         <div class="card">
             <h5 class="card-header">Featured</h5>
             <div class="card-body">

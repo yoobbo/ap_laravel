@@ -18,6 +18,18 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label">Categories</label>
+                <select class="form-control" name="category" id="">
+                    <option value="Categories">Select Categories</option>
+                    @foreach($categories as $cat)
+                        <option value="{{$cat->id}}" {{ $cat->id == $post->category_id  ? 'selected' : '' }}>
+                            {{$cat->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <br>
             <button type="submit" class="btn btn-primary">Submit</button>
             <a href="/posts" class="btn btn-success">Back</a>
         </form>

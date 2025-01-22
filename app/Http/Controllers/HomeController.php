@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Requests\storePostRequest;
 
 
 class HomeController extends Controller
@@ -23,7 +25,8 @@ class HomeController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $categories = Category::all();
+        return view('create',compact('categories'));
     }
 
     /**
@@ -31,16 +34,18 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:500',
-        ]);
 
         $post = new Post();
         $post->name = $request->name;
         $post->description = $request->description;
+        $post->category_id = $request->category;
 
         $post->save();
+
+        // Post::create([
+        //     'name' => $request->name,
+        //     'description' => $request->description,
+        // ]);
         return redirect("/posts");
     }
 
@@ -51,7 +56,7 @@ class HomeController extends Controller
     {
         // $data = Post::findOrFail($id);
         // $post->categories;
-        dd($post->categories->name);
+        
         return view('show', compact('post'));
     }
 
@@ -61,7 +66,8 @@ class HomeController extends Controller
     public function edit(Post $post)
     {
         // $data = Post::findOrFail($id);
-        return view('edit', compact('post'));
+        $categories = Category::all();
+        return view('edit', compact('post'),compact('categories'));
     }
 
     /**
@@ -73,9 +79,11 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:500',
+            'category_id' => '$required',
         ]);
         $post->name = $request->name;
         $post->description = $request->description;
+        $post->category_id = $request->category;
 
         $post->save();
         return redirect("/posts");

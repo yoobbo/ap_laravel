@@ -19,9 +19,11 @@
             </div>
             <div class="form-group">
             <label for="exampleInputEmail1" class="form-label">Categories</label>
-                <select class="form-control" name="Categories" id="">
-                    <option value="Categories">up</option>
-                    <option value="">down</option>
+                <select class="form-control" name="category" id="">
+                    <option value="Categories">Select Categories</option>
+                    @foreach($categories as $cat)
+                    <option value="{{$cat->id}}">{{$cat->name}}</option>
+                    @endforeach
                 </select>
             </div>
             <br>
