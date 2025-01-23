@@ -16,7 +16,7 @@ use App\Http\Controllers\HomeController;
 */
 
 // Route::get('posts',HomeController::class);
-Route::resource('posts',HomeController::class);
+Route::resource('posts',HomeController::class)->middleware('auth');
 // Route::get('posts/{id}', [HomeController::class, 'show']);
 // Route::get('posts/create', [HomeController::class, 'create']);
 // Route::get('/{id}', [HomeController::class, 'show']);
@@ -29,10 +29,4 @@ Route::resource('posts',HomeController::class);
 
 Route::get('logout',[AuthController::class, 'logout']);
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'index']);
-});
+

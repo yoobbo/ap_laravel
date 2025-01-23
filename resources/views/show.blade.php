@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{$post->name}}</h5>
                 <p class="card-text">{{$post->description}}</p>
-                <p class="card-text text-primary">{{$post->categories->name}}</p>
+                <p class="card-text text-primary">{{'Category : ' . $post->categories->name}}</p>
                 <a href="/posts" class="btn btn-primary">back</a><p></p><hr>
             </div>
         </div>

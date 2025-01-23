@@ -3,7 +3,7 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <a href="posts/create" class="btn btn-success">Create</a>
-            <a href="posts/create" class="btn btn-success">Create</a>
+            <a href="logout" class="btn btn-info">Logout</a>
         </div><p></p>
         <div class="card">
             <h5 class="card-header">Featured</h5>
