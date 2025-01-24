@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Post::orderby("id", "desc")->get();
+        $data = Post::where('user_id', auth()->id())->orderby("id", "desc")->get();
         return view("home", compact("data"));
     }
 
@@ -56,7 +56,10 @@ class HomeController extends Controller
     {
         // $data = Post::findOrFail($id);
         // $post->categories;
-        
+        // if($post -> user_id != auth()->id()){
+        //     abort(403);
+        // }
+        $this->authorize('view', $post);
         return view('show', compact('post'));
     }
 
@@ -66,6 +69,10 @@ class HomeController extends Controller
     public function edit(Post $post)
     {
         // $data = Post::findOrFail($id);
+        // if($post -> user_id != auth()->id()){
+        //     abort(403);
+        // }
+        $this->authorize('view', $post);
         $categories = Category::all();
         return view('edit', compact('post'),compact('categories'));
     }
